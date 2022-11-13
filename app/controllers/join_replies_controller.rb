@@ -1,0 +1,2 @@
+class JoinRepliesController < ApplicationController
+end
