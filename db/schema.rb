@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_13_174628) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_181719) do
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -23,8 +23,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_174628) do
     t.integer "child_reply_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["child_reply_id"], name: "index_join_replies_on_child_reply_id"
-    t.index ["parent_reply_id"], name: "index_join_replies_on_parent_reply_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -41,9 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_174628) do
   create_table "posts", force: :cascade do |t|
     t.text "content"
     t.string "image"
-    t.integer "timestamp"
-    t.integer "like_count"
-    t.integer "reply_count"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,12 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_174628) do
   create_table "replies", force: :cascade do |t|
     t.text "content"
     t.string "image"
-    t.integer "timestamp"
-    t.integer "like_count"
     t.integer "post_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_replies_on_post_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,11 +69,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_174628) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "join_replies", "replies", column: "child_reply_id"
-  add_foreign_key "join_replies", "replies", column: "parent_reply_id"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "replies"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "replies", "posts"
+  add_foreign_key "replies", "users"
 end

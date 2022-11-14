@@ -4,7 +4,7 @@ class AuthController < ApplicationController
 
     def login 
         @user = User.find_by!(username: login_params[:username])
-        if @user.authenticate(login_params[:password])
+        if @user&.authenticate(login_params[:password])
             @token = encode_token(user_id: @user.id)
             render json: {
                 user: UserSerializer.new(@user),

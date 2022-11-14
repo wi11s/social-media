@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   resources :follows
   resources :likes
   resources :replies
-  resources :posts
+  resources :posts, only: [:index]
   resources :users, only: [:index, :create]
 end
