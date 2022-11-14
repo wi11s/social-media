@@ -4,7 +4,7 @@ class CreateReplies < ActiveRecord::Migration[7.0]
       t.text :content
       t.string :image
       t.references :post, null: false, foreign_key: true
-
+      t.references :user, null: false, foreign_key: true
       t.timestamps
     end
   end

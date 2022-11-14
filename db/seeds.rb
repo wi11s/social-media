@@ -42,6 +42,21 @@ JoinReply.create(parent_reply_id: 1, child_reply_id: 4)
 
 
 
+Post.create(content: 'hhhhhh', user_id: 1)
+
+Reply.create(content: 'hello', post_id: 1, user_id: 1)
+Reply.create(content: 'asdg', post_id: 1, user_id: 1)
+Reply.create(content: 'dddd', post_id: 1, user_id: 1)
+Reply.create(content: 'dddd', post_id: 1, user_id: 1)
+Reply.create(content: 'dddd', post_id: 1, user_id: 1)
+Reply.create(content: 'jhgjhg', post_id: 1, user_id: 1)
+
+JoinReply.create(parent_reply_id: 1, child_reply_id: 2)
+JoinReply.create(parent_reply_id: 1, child_reply_id: 3)
+JoinReply.create(parent_reply_id: 1, child_reply_id: 4)
+JoinReply.create(parent_reply_id: 4, child_reply_id: 5)
+JoinReply.create(parent_reply_id: 4, child_reply_id: 6)
+
 
 
 

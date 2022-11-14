@@ -5,4 +5,6 @@ class User < ApplicationRecord
     has_many :followeds, :class_name => "Follow", :foreign_key => "followed_id"
 
     has_many :posts
+
+    validates :username, uniqueness: true
 end
