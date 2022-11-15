@@ -3,12 +3,12 @@ import Login from './Login';
 import Home from './Home';
 import Header from './Header';
 import Profile from './Profile';
+import Search from './Search';
 import NotFound from './NotFound';
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 function App() {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -32,9 +32,10 @@ function App() {
     <div className="App">
       <Header setUser={setUser}/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home user={user}/>} />
         <Route path="*" element={<NotFound />} />
         <Route path="/profile" element={<Profile user={user}/>} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </div>
   );
