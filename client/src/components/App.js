@@ -24,7 +24,7 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
-  }, []);
+  }, [localStorage.getItem("jwt")]);
 
   if (!user) return <Login onLogin={setUser} />;
 

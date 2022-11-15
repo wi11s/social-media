@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 export default function Post({post, user}) {
-  console.log(post)
+  // console.log(post)
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes_count)
 
@@ -14,7 +14,7 @@ export default function Post({post, user}) {
     })
     .then(r => r.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       if (data) {
         setLiked(true)
       }
@@ -65,8 +65,8 @@ export default function Post({post, user}) {
           <p>{post.content}</p>
         </blockquote>
       </div>
-      <p>{likes} {likes===1 ? 'like' : 'likes'}</p>
-      <button onClick={handleClick}>{liked ? '♥' : '♡'}</button>
+      <p>{likes} {likes===1 ? 'like' : 'likes'} - {post.replies_count} {post.replies_count===1 ? 'reply' : 'replies'}</p>
+      <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
     </div>
   )
 }

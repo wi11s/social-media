@@ -50,3 +50,13 @@
 .navbar-brand {
   margin-left: 2%;
 }
+
+.card {
+  margin-bottom: 2%;
+}
+
+.likeBtn {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+}
