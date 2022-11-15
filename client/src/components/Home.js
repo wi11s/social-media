@@ -12,7 +12,10 @@ export default function Home({user}) {
     }
   })
   .then(r => r.json())
-  .then(posts => setPosts(posts))
+  .then(posts => {
+    console.log(posts)
+    setPosts(posts)
+  })
   }, [])
 
   return (

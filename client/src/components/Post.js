@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import Replies from './Replies'
 
 export default function Post({post, user}) {
   // console.log(post)
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes_count)
+  const [expand, setExpand] = useState(false)
 
   useEffect(() => {
     fetch(`/like/${user.id}/${post.id}`, {
@@ -55,6 +57,10 @@ export default function Post({post, user}) {
       })
   }
 
+  function handleExpand() {
+    setExpand(!expand)
+  }
+
   return (
     <div className="post">
       <div className='card'>
@@ -66,9 +72,10 @@ export default function Post({post, user}) {
             <p>{post.content}</p>
           </blockquote>
         </div>
-        <p>{likes} {likes===1 ? 'like' : 'likes'} - {post.replies_count} {post.replies_count===1 ? 'reply' : 'replies'}</p>
+        <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {post.replies_count} {post.replies_count===1 ? 'reply' : 'replies'}</p>
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
       </div>
+      {expand ? <Replies postId={post.id}/> : null}
     </div>
   )
 }

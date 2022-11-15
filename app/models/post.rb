@@ -11,4 +11,9 @@ class Post < ApplicationRecord
   def replies_count
     self.replies.count
   end
+
+  def initial_replies
+    self.replies.map { |reply| reply if reply.is_initial_reply }.compact
+  end
+
 end

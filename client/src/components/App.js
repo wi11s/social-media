@@ -19,7 +19,7 @@ function App() {
       }
     })
     .then((r) => {
-      console.log(r)
+      // console.log(r)
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }

@@ -20,6 +20,7 @@ export default function Login({ onLogin }) {
     })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data)
       localStorage.setItem("jwt", data.token);
       onLogin(data);
     })
