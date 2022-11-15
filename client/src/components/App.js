@@ -26,7 +26,7 @@ function App() {
     });
   }, [localStorage.getItem("jwt")]);
 
-  if (!user) return <Login onLogin={setUser} />;
+  if (!user) return (<div className="login"><Login onLogin={setUser} /></div>);
 
   return (
     <div className="App">

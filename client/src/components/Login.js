@@ -3,6 +3,10 @@ import React, {useState} from 'react'
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [name, setName] = useState('')
+  const [signup, setSignup] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -29,20 +33,78 @@ export default function Login({ onLogin }) {
     setPassword(e.target.value)
   }
 
+  function handlePasswordConfirmationChange(e) {
+    setPasswordConfirmation(e.target.value)
+  }
+
+  function handleNameChange(e) {
+    setName(e.target.value)
+  }
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value)
+  }
+
+  function handleSignupSubmit(e) {
+    e.preventDefault()
+    fetch('/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: email, 
+        username: username, 
+        password: password, 
+        password_confirmation: passwordConfirmation
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+      localStorage.setItem("jwt", data.token);
+      onLogin(data);
+    })
+  }
+
 
   return (
     <div id="login">
-        <form onSubmit={handleSubmit}>
-          <div className='form-group'>
-            <label for="exampleInputEmail1">Username</label>
-            <input className='form-control' type='text' placeholder='username' onChange={handleUsernameChange}/>
-          </div>
-          <div className='form-group'>
-            <label for="exampleInputPassword1">Password</label>
-            <input className='form-control' type='password' placeholder='password' onChange={handlePasswordChange}/>
-          </div>
-          <button id='loginSubmit' className="btn btn-primary" type='submit'>Login</button>
-        </form>
+      {signup ? (
+        <div>
+          <form onSubmit={handleSignupSubmit}>
+            <div className='form-group'>
+              <input className='form-control' type='text' placeholder='username' onChange={handleUsernameChange}/>
+              <input className='form-control' type='text' placeholder='full name' onChange={handleNameChange}/>
+              <input className='form-control' type='text' placeholder='email' onChange={handleEmailChange}/>
+            </div>
+            <div className='form-group'>
+              <input className='form-control' type='password' placeholder='password' onChange={handlePasswordChange}/>
+              <input className='form-control' type='password' placeholder='password' onChange={handlePasswordConfirmationChange}/>
+            </div>
+            {password===passwordConfirmation ? <button id='loginSubmit' className="btn btn-primary" type='submit'>Sign Up</button> : <p>Passwords do not match</p>}
+            
+          </form>
+          <p>Already have an account?</p>
+          <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Log In</button>
+        </div>
+      ) : (
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className='form-group'>
+              <label for="exampleInputEmail1">Username</label>
+              <input className='form-control' type='text' placeholder='username' onChange={handleUsernameChange}/>
+            </div>
+            <div className='form-group'>
+              <label for="exampleInputPassword1">Password</label>
+              <input className='form-control' type='password' placeholder='password' onChange={handlePasswordChange}/>
+            </div>
+            <button id='loginSubmit' className="btn btn-primary" type='submit'>Login</button>
+          </form>
+          <p>Don't have an account?</p>
+          <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Sign Up</button>
+        </div>
+        )}
+
     </div>
   )
 }

@@ -5,7 +5,7 @@
   bottom:0%;
   left:0%;
   right:0%;
-  background-color: #282c34;
+  background-color: #66806A;
 }
 
 .App-header {
@@ -24,6 +24,15 @@
   left: 40%;
   right: 40%;
   bottom: 40%;
+}
+
+.login {
+  background-color: #66806A;
+  position:absolute;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
 }
 
 #loginSubmit {
@@ -53,10 +62,20 @@
 
 .card {
   margin-bottom: 2%;
+  background-color: #F6F6F6;
 }
 
 .likeBtn {
   position: absolute;
   bottom: 2%;
   left: 2%;
+}
+
+.navbar {
+  background-color: #F6F6F6;
+}
+
+.nav-item {
+  color: black;
+  text-decoration: none;
 }

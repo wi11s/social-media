@@ -56,17 +56,19 @@ export default function Post({post, user}) {
   }
 
   return (
-    <div className='card'>
-      <div className="card-header">
-        {post.user.username}
+    <div className="post">
+      <div className='card'>
+        <div className="card-header">
+          {post.user.username}
+        </div>
+        <div className="card-body">
+          <blockquote className="blockquote mb-0">
+            <p>{post.content}</p>
+          </blockquote>
+        </div>
+        <p>{likes} {likes===1 ? 'like' : 'likes'} - {post.replies_count} {post.replies_count===1 ? 'reply' : 'replies'}</p>
+        <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
       </div>
-      <div className="card-body">
-        <blockquote className="blockquote mb-0">
-          <p>{post.content}</p>
-        </blockquote>
-      </div>
-      <p>{likes} {likes===1 ? 'like' : 'likes'} - {post.replies_count} {post.replies_count===1 ? 'reply' : 'replies'}</p>
-      <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
     </div>
   )
 }
