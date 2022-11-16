@@ -19,7 +19,7 @@ export default function Replies({postId, user}) {
   return (
     <div>{replies.map(reply => {
         if (reply !== null) {
-            return <Reply user={user} key={reply.id} reply={reply}/>
+            return <Reply user={user} postId={postId} key={reply.id} reply={reply}/>
         }
     })}</div>
   )

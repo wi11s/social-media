@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   delete "/like/reply/:user_id/:reply_id", to: "likes#destroy_reply_like"
   get "/posts/replies/:post_id", to: "posts#replies"
 
-  resources :join_replies
+  resources :join_replies, only: [:create]
   resources :follows
   resources :likes, only: [:create]
-  resources :replies, only: [:show]
-  resources :posts, only: [:index]
+  resources :replies, only: [:show, :create]
+  resources :posts, only: [:index, :create]
   resources :users, only: [:index, :create]
 end
