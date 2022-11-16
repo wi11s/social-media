@@ -21,7 +21,7 @@ export default function Post({post, user}) {
         setLiked(true)
       }
     })
-  }, [])
+  }, [localStorage.getItem("jwt")])
 
   function handleClick() {
     if (liked === false) {
@@ -33,12 +33,12 @@ export default function Post({post, user}) {
         },
         body: JSON.stringify({
           post_id: post.id,
-          user_id: user.id, 
-          reply_id: 1
+          user_id: user.id
         })
       })
       .then(r => r.json())
       .then(data => {
+        console.log(data)
         setLiked(true)
         let newLikes = likes + 1
         setLikes(newLikes)
@@ -75,7 +75,7 @@ export default function Post({post, user}) {
         <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {post.replies_count} {post.replies_count===1 ? 'reply' : 'replies'}</p>
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
       </div>
-      {expand ? <Replies postId={post.id}/> : null}
+      {expand ? <Replies user={user} postId={post.id}/> : null}
     </div>
   )
 }
