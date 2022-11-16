@@ -10,10 +10,18 @@ export default function Header({setUser}) {
     navigate("/");
   }
   return (
-    <div id='header'>
-        <button id="logoutButton" onClick={handleClick} className="btn btn-danger">Log Out</button>
-        <Link to="profile"><button id="profileButton" className="btn btn-primary">Profile</button></Link>
-        <Link to="/"><button id="homeButton" className="btn btn-primary">Home</button></Link>
-    </div>
+    <nav className="navbar navbar-expand-lg">
+        <a className="navbar-brand" href="#">Social Media</a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <Link className='nav-item' to="/">Home</Link>
+          <Link className='nav-item' to="profile">Profile</Link>
+          <Link className='nav-item' to="search">Search</Link>
+          <button id="logoutButton" onClick={handleClick} className="btn nav-item">Log Out</button>
+        </div>
+    </nav>
   )
 }
