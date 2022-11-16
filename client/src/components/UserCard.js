@@ -39,13 +39,11 @@ export default function UserCard({cardUser, user}) {
 
   return (
     <div className='userCard'>
-        <div className="card">
+        <div className="card"> 
             {!!cardUser.avatar ? <img className="card-img-top" src={cardUser.avatar} alt="avatar"/> : <h1>👤</h1>}
-            <div className="card-body">
-                <h5 className="card-title">{cardUser.username}</h5>
-                <p className="card-text">{cardUser.bio}</p>
-                <a href="#" className="btn btn-primary" onClick={handleFollowOrUnfollow}>{ buttonToggle ? 'unfollow' : 'follow' }</a>
-            </div>
+            <h5 className="card-title">{cardUser.username}</h5>
+            <p className="card-text">{cardUser.bio}</p>
+            <a href="#" className="btn btn-primary" onClick={handleFollowOrUnfollow}>{ buttonToggle ? 'unfollow' : 'follow' }</a>
         </div>
     </div>
   )

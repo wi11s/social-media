@@ -28,7 +28,7 @@ export default function Search({user}) {
     <div>
       <h1>Search</h1>
       <form>
-        <input type="text" placeholder="Search" onChange={handleChange}/>
+        <input className="form-control search" type="text" placeholder="Search" onChange={handleChange}/>
       </form>
       {users.filter(otherUser => otherUser.username.toLowerCase().includes(search.toLowerCase())).map(otherUser => {
         return <UserCard key={otherUser.id} user={user} cardUser={otherUser}/>

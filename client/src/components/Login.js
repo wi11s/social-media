@@ -71,7 +71,7 @@ export default function Login({ onLogin }) {
   return (
     <div id="login">
       {signup ? (
-        <div>
+        <div className="signUpForm">
           <form onSubmit={handleSignupSubmit}>
             <div className='form-group'>
               <input className='form-control' type='text' placeholder='username' onChange={handleUsernameChange}/>
@@ -83,14 +83,13 @@ export default function Login({ onLogin }) {
               <input className='form-control' type='password' placeholder='password' onChange={handlePasswordConfirmationChange}/>
             </div>
             {password===passwordConfirmation ? <button id='loginSubmit' className="btn btn-primary" type='submit'>Sign Up</button> : <p>Passwords do not match</p>}
-            
           </form>
-          <p>Already have an account?</p>
+          <p className='loginText'>Already have an account?</p>
           <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Log In</button>
         </div>
       ) : (
-        <div>
-          <form onSubmit={handleSubmit}>
+        <div className="signUpForm">
+          <form className="signUpForm" onSubmit={handleSubmit}>
             <div className='form-group'>
               <label for="exampleInputEmail1">Username</label>
               <input className='form-control' type='text' placeholder='username' onChange={handleUsernameChange}/>
@@ -101,7 +100,7 @@ export default function Login({ onLogin }) {
             </div>
             <button id='loginSubmit' className="btn btn-primary" type='submit'>Login</button>
           </form>
-          <p>Don't have an account?</p>
+          <p className='loginText'>Don't have an account?</p>
           <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Sign Up</button>
         </div>
         )}

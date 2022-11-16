@@ -23,10 +23,9 @@ body {
 
 #login {
   position:absolute;
-  top: 40%;
+  top: 20%;
   left: 40%;
   right: 40%;
-  bottom: 40%;
 }
 
 .login {
@@ -64,9 +63,17 @@ body {
 }
 
 .card {
+  position: relative;
+  padding: 4%;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 2%;
   background-color: #F6F6F6;
+  display: flex;
+
 }
+
 
 .likeBtn {
   position: absolute;
@@ -100,4 +107,60 @@ body {
 
 .newPostBtn {
   margin: 2%;
+}
+
+.updateProfileForm {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  right: 30%;
+}
+
+.signUpForm {
+  background-color: rgb(255, 255, 255);
+  padding: 10%;
+  border-radius: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control {
+  margin-bottom: 5%
+}
+
+.btn-primary {
+  background-color: #66806A;
+  border-color: #66806A;
+}
+
+.btn-primary:hover, .btn-primary:active {
+  background-color: #3f5142 !important;
+  border-color: #3f5142 !important;
+}
+
+.loginText {
+  margin-top: 5%;
+}
+
+.userCard {
+  justify-content: center;
+  justify-items: center;
+  flex-direction: column;
+  display: flex;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.search {
+  margin: 0 auto;
+  width: 30%;
+  margin-bottom: 2%;
+}
+
+.card-img-top {
+  height: 80px;
+  width: auto;
+  border-radius: 50%;
 }

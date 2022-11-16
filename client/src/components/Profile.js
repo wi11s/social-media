@@ -46,11 +46,11 @@ export default function Profile({user}) {
   return (
     <div>
       {updating? (
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="username" placeholder="Username" value={user.username} onChange={handleUsernameChange}/>
-          <input type="text" name="bio" placeholder="Bio" onChange={handleBioChange} value={user.bio}/>
-          <input type="file" name="avatar" onChange={handleAvatarChange}/>
-          <button type="submit">Submit</button>
+        <form onSubmit={handleSubmit} className='updateProfileForm'>
+          <input className="form-control" type="text" name="username" placeholder="Username" value={user.username} onChange={handleUsernameChange}/>
+          <input className="form-control" type="text" name="bio" placeholder="Bio" onChange={handleBioChange} value={user.bio}/>
+          <input className="form-control" type="file" name="avatar" onChange={handleAvatarChange}/>
+          <input className="form-control" type="submit"/>
         </form>
       ) : (
         <div>
@@ -70,7 +70,7 @@ export default function Profile({user}) {
         )}
       </div>
       )}
-      <button onClick={handleUpdate}>Update</button>
+      <button className='btn btn-secondary' onClick={handleUpdate}>{updating ? 'cancel' : 'update'}</button>
     </div>
   )
 }
