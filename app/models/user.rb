@@ -10,4 +10,8 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates :email, presence: true
     validates :username, presence: true
+
+    def following
+        self.followings.map {|follow| follow.followed}
+    end
 end

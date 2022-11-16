@@ -47,17 +47,16 @@ export default function Home({user}) {
 
   return (
     <div id="posts">
+      <button className="btn btn-dark newPostBtn" onClick={() => setNewPost(!newPost)}>New Post</button>
+      {newPost ? (
+        <form onSubmit={handleSubmit} className='newPost'>
+          <input className="form-control" type="text" placeholder="What's on your mind?" onChange={handleChange}/>
+          <input className="form-control" type="submit" />
+        </form>
+      ) : null}
         {posts.map(post => {
           return <Post key={post.id} post={post} user={user}/>
         })}
-        <button className="btn btn-dark" onClick={() => setNewPost(!newPost)}>New Post</button>
-        {newPost ? (
-          <form onSubmit={handleSubmit}>
-            <input className="form-control" type="text" placeholder="What's on your mind?" onChange={handleChange}/>
-            <input className="form-control" type="submit" />
-          </form>
-        ) : null}
-
     </div>
   )
 }

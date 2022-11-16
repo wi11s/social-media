@@ -93,3 +93,11 @@ body {
   margin-left: 10%;
   margin-right: -10%;
 }
+
+.newPost {
+  margin-bottom: 5%;
+}
+
+.newPostBtn {
+  margin: 2%;
+}
