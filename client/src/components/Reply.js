@@ -1,25 +1,31 @@
 import React, {useState, useEffect} from 'react'
 
-export default function Reply({reply, user}) {
+export default function Reply({reply, user, postId}) {
     const [liked, setLiked] = useState(false)
     const [likes, setLikes] = useState(reply.like_count)
     const [expand, setExpand] = useState(false)
     const [nestedReplies, setNestedReplies] = useState([])
-    console.log(reply.id, user.id)
+    const [replies, setReplies] = useState(false)
+    const [content, setContent] = useState('')
+    // console.log(reply.id, user.id)
 
     function handleExpand() {
+      if (!expand) {
         fetch(`/replies/${reply.id}`, {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('jwt')}`
-            }
+          method: 'GET',
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem('jwt')}`
+          }
         })
         .then(r => r.json())
         .then(data => {
-            // console.log(data)
-            setNestedReplies(data)
-            setExpand(!expand)
+          // console.log(data)
+          setNestedReplies(data)
+          setExpand(true)
         })
+      } else {
+        setExpand(false)
+      }
     }
 
     useEffect(() => {
@@ -72,6 +78,51 @@ export default function Reply({reply, user}) {
             })
     }
 
+    function handleReplyClick() {
+        setReplies(!replies)
+    }
+
+    function handleContentChange(e) {
+        setContent(e.target.value)
+    }
+
+    function handleReplySubmit(e) {
+      e.preventDefault()
+      fetch('/replies', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        },
+        body: JSON.stringify({
+          content: content,
+          user_id: user.id,
+          post_id: postId
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        console.log(data)
+        fetch('/join_replies', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+          },
+          body: JSON.stringify({
+            parent_reply_id: reply.id,
+            child_reply_id: data.id
+          })
+        })
+        .then(r => r.json())
+        .then((data) => {
+          console.log(data)
+          handleExpand()
+          let newNestedReplies = [...nestedReplies, data]
+          setNestedReplies(newNestedReplies)
+        })
+      })
+    }
   return (
     <div className='replyDiv'>
         <div className='card replyCard'>
@@ -85,10 +136,17 @@ export default function Reply({reply, user}) {
             </div>
             <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {reply.reply_count} {reply.reply_count===1 ? 'reply' : 'replies'}</p>
             <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
+            <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
+            {replies ? (
+              <form onSubmit={handleReplySubmit}>
+                <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
+                <input type="submit" className="form-control" value="Post" />
+              </form>
+            ) : null}
         </div>
         {expand ? (
             nestedReplies.map(reply => {
-                return <Reply key={reply.id} user={user} reply={reply}/>
+                return <Reply key={reply.id} user={user} postId={postId} reply={reply}/>
             })
         ) : null } 
     </div>

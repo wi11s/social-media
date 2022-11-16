@@ -20,10 +20,15 @@ class UsersController < ApplicationController
         render json: users
     end
 
+    def update
+        user = User.find(params[:id]).update!(user_params)
+        render json: user
+    end
+
     private
 
     def user_params 
-        params.permit(:username, :name, :password, :password_confirmation, :email)
+        params.permit(:username, :name, :password, :password_confirmation, :email, :avatar, :bio)
     end
 
     def handle_invalid_record(e)
