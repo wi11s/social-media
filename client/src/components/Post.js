@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Replies from './Replies'
 
 export default function Post({post, user}) {
-  // console.log(post)
+  console.log(post)
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes_count)
   const [expand, setExpand] = useState(false)
+  const [replies, setReplies] = useState(true)
 
   useEffect(() => {
     fetch(`/like/${user.id}/${post.id}`, {
@@ -61,6 +62,10 @@ export default function Post({post, user}) {
     setExpand(!expand)
   }
 
+  function handleReplyClick() {
+    setReplies(!replies)
+  }
+
   return (
     <div className="post">
       <div className='card'>
@@ -72,8 +77,15 @@ export default function Post({post, user}) {
             <p>{post.content}</p>
           </blockquote>
         </div>
-        <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {post.replies_count} {post.replies_count===1 ? 'reply' : 'replies'}</p>
+        <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {post.initial_replies.length} {post.initial_replies.length===1 ? 'reply' : 'replies'}</p>
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
+        <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
+        {replies ? (
+          <form>
+            <input type="text" className="form-control" placeholder="Reply to this post" />
+            <input type="submit" className="form-control" value="Send" />
+          </form>
+        ) : null}
       </div>
       {expand ? <Replies user={user} postId={post.id}/> : null}
     </div>

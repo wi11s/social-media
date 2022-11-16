@@ -71,6 +71,12 @@
   left: 2%;
 }
 
+.replyBtn {
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+}
+
 .navbar {
   background-color: #F6F6F6;
 }
