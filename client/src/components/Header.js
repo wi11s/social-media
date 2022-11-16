@@ -17,9 +17,9 @@ export default function Header({setUser}) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <Link className='nav-item' to="/">Home</Link>
-          <Link className='nav-item' to="profile">Profile</Link>
-          <Link className='nav-item' to="search">Search</Link>
+          <Link className='nav-item' to="/"><h7 className="nav-item-text">Home</h7></Link>
+          <Link className='nav-item' to="profile"><h7 className="nav-item-text">Profile</h7></Link>
+          <Link className='nav-item' to="search"><h7 className="nav-item-text">Search</h7></Link>
           <button id="logoutButton" onClick={handleClick} className="btn nav-item">Log Out</button>
         </div>
     </nav>

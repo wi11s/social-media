@@ -26,7 +26,6 @@ export default function Search({user}) {
 
   return (
     <div>
-      <h1>Search</h1>
       <form>
         <input className="form-control search" type="text" placeholder="Search" onChange={handleChange}/>
       </form>
