@@ -9,7 +9,10 @@ body {
   left:0%;
   right:0%;
   font-family: 'Noto Sans Ethiopic', sans-serif;
-}
+ }
+  
+
+
 
 .App-header {
   min-height: 100vh;
@@ -53,6 +56,7 @@ body {
   top: 15%;
   left: 30%;
   right: 30%;
+  overflow-wrap: break-word;
 }
 
 .nav-item {
@@ -65,18 +69,33 @@ body {
   color: white;
 }
 
+
 .card {
   position: relative;
   padding: 4%;
   align-items: flex-start;
-  flex-direction: row;
+  /* flex-direction: row; */
   justify-content: space-between;
   margin-bottom: 2%;
   background-color: #F6F6F6;
-  display: flex;
-
 }
 
+.postContent {
+  word-break: break-all;
+  white-space: normal;
+  width: 100%;
+}
+
+.interactionCount {
+  float: right;
+  word-break: normal;
+  width: 30%;
+}
+/* 
+.blockquote-mb-0 {
+  display: flex;
+  flex-wrap: wrap;
+} */
 
 .likeBtn {
   position: absolute;
@@ -153,6 +172,8 @@ body {
   display: flex;
   margin-left: 30%;
   margin-right: 30%;
+  overflow-wrap: break-word;
+  padding: 2%;
 }
 
 .search {

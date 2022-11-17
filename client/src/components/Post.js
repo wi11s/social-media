@@ -106,7 +106,7 @@ export default function Post({post, username, user}) {
         </div>
         <div className="card-body">
           <blockquote className="blockquote mb-0">
-            <p>{post.content}</p>
+            <p className='postContent'>{post.content}</p>
           </blockquote>
         </div>
         <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
