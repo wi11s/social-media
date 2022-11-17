@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { motion, useTime, useTransform } from "framer-motion";
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState('')
@@ -7,6 +8,9 @@ export default function Login({ onLogin }) {
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [name, setName] = useState('')
   const [signup, setSignup] = useState(false)
+
+  const time = useTime();
+  const rotate = useTransform(time, [0, 4000], [0, 360], { clamp: false });
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -79,6 +83,7 @@ export default function Login({ onLogin }) {
 
   return (
     <div id="login">
+      <motion.div style={{ rotate }}>
       {signup ? (
         <div className="signUpForm">
           <form onSubmit={handleSignupSubmit}>
@@ -113,7 +118,7 @@ export default function Login({ onLogin }) {
           <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Sign Up</button>
         </div>
         )}
-
+        </motion.div>
     </div>
   )
 }
