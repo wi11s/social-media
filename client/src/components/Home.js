@@ -38,10 +38,13 @@ export default function Home({user}) {
     })
     .then(r => r.json())
     .then(post => {
-      console.log(post)
-      setPosts([...posts, post])
-      setContent('')
-      setNewPost(false)
+      if (post.id) {
+        setPosts([post, ...posts])
+        setContent('')
+        setNewPost(false)
+      } else {
+        alert('empty post')
+      }
     })
   }
 
@@ -52,7 +55,7 @@ export default function Home({user}) {
           <input className="form-control newPostSubmit" type="submit" />
         </form>
         {posts.map(post => {
-          return <Post key={post.id} post={post} user={user}/>
+          return <Post key={post.id} post={post} username={post.user.username} user={user}/>
         })}
     </div>
   )

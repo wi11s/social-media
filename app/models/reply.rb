@@ -8,6 +8,8 @@ class Reply < ApplicationRecord
 
   has_many :child_replies, class_name: :JoinReply, foreign_key: "child_reply_id"
 
+  validates :content, presence: true
+
   def like_count
     likes.count
   end

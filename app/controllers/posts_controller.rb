@@ -14,6 +14,11 @@ class PostsController < ApplicationController
         render json: post, status: :created
     end
 
+    def user_posts
+        posts = Post.where(user_id: params[:user_id])
+        render json: posts, status: :ok
+    end
+
     private
 
     def post_params

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Replies from './Replies'
 
-export default function Post({post, user}) {
+export default function Post({post, username, user}) {
   // console.log(post)
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes_count)
+  const [replyCount, setReplyCount] = useState(post.initial_replies.length)
   const [expand, setExpand] = useState(false)
   const [replies, setReplies] = useState(false)
   const [content, setContent] = useState('')
@@ -88,7 +89,12 @@ export default function Post({post, user}) {
     .then(r => r.json())
     .then(data => {
       console.log(data)
-      setExpand(true)
+      if (data.id) {
+        setExpand(true)
+        setReplyCount(replyCount => replyCount + 1)
+      } else {
+        alert("empty post")
+      }
     })
   }
 
@@ -96,14 +102,14 @@ export default function Post({post, user}) {
     <div className="post">
       <div className='card'>
         <div className="card-header">
-          {post.user.username}
+          {username}
         </div>
         <div className="card-body">
           <blockquote className="blockquote mb-0">
             <p>{post.content}</p>
           </blockquote>
         </div>
-        <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {post.initial_replies.length} {post.initial_replies.length===1 ? 'reply' : 'replies'}</p>
+        <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
         <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
         {replies ? (

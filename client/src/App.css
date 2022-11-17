@@ -8,7 +8,7 @@ body {
   bottom:0%;
   left:0%;
   right:0%;
-  /* background-color: #66806A; */
+  font-family: 'Noto Sans Ethiopic', sans-serif;
 }
 
 .App-header {
@@ -19,6 +19,7 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-family: 'Noto Sans Ethiopic', sans-serif;
 }
 
 #login {
@@ -163,7 +164,7 @@ body {
 
 .card-img-top {
   height: 80px;
-  width: auto;
+  width: 80px;
   border-radius: 50%;
 }
 
@@ -174,4 +175,23 @@ body {
 
 #logoutButton {
   color: white;
+}
+
+.profile {
+  background-color: white;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  right: 55%;
+  bottom: 20%;
+  border-radius: 3%;
+}
+
+.userPostsOnProfile {
+  position: absolute;
+  top: 20%;
+  left: 55%;
+  right: 10%;
+  bottom: 20%;
+  border-radius: 3%;
 }

@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :users, through: :likes
 
+  validates :content, presence: true
+
   def likes_count
     self.likes.count
   end
