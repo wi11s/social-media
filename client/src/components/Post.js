@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Replies from './Replies'
 
-export default function Post({post, user}) {
+export default function Post({post, username, user}) {
   // console.log(post)
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes_count)
@@ -93,7 +93,7 @@ export default function Post({post, user}) {
         setExpand(true)
         setReplyCount(replyCount => replyCount + 1)
       } else {
-        alert('empty post')
+        alert("empty post")
       }
     })
   }
@@ -102,14 +102,14 @@ export default function Post({post, user}) {
     <div className="post">
       <div className='card'>
         <div className="card-header">
-          {post.user.username}
+          {username}
         </div>
         <div className="card-body">
           <blockquote className="blockquote mb-0">
             <p className='postContent'>{post.content}</p>
           </blockquote>
         </div>
-        <p className='interactionCount' onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
+        <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
         <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
         {replies ? (

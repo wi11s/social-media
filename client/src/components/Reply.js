@@ -119,14 +119,14 @@ export default function Reply({reply, user, postId}) {
         .then((data) => {
           console.log(data)
           if (data.id) {
-            setReplyCount(new_reply_count => new_reply_count + 1)
+            setReplyCount(replyCount => replyCount + 1)
+            setContent('')
             handleExpand()
             let newNestedReplies = [...nestedReplies, data]
             setNestedReplies(newNestedReplies)
           } else {
             alert('empty post')
           }
-          
         })
       })
     }
