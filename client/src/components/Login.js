@@ -7,6 +7,7 @@ export default function Login({ onLogin }) {
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [name, setName] = useState('')
   const [signup, setSignup] = useState(false)
+  const [signupErrors, setSignupErrors] = useState([])
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -66,6 +67,12 @@ export default function Login({ onLogin }) {
     })
     .then((res) => res.json())
     .then((data) => {
+      if (data.user) {
+        localStorage.setItem("jwt", data.token);
+        onLogin(data);
+      } else {
+        alert(data.errors)
+      }
       console.log(data)
       if (data.user) {
         localStorage.setItem("jwt", data.token);

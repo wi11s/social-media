@@ -127,7 +127,6 @@ export default function Reply({reply, user, postId}) {
           } else {
             alert('empty post')
           }
-
         })
       })
     }
