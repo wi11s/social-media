@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 export default function Reply({reply, user, postId}) {
     const [liked, setLiked] = useState(false)
     const [likes, setLikes] = useState(reply.like_count)
+    const [replyCount, setReplyCount] = useState(reply.reply_count)
     const [expand, setExpand] = useState(false)
     const [nestedReplies, setNestedReplies] = useState([])
     const [replies, setReplies] = useState(false)
@@ -117,9 +118,15 @@ export default function Reply({reply, user, postId}) {
         .then(r => r.json())
         .then((data) => {
           console.log(data)
-          handleExpand()
-          let newNestedReplies = [...nestedReplies, data]
-          setNestedReplies(newNestedReplies)
+          if (data.id) {
+            setReplyCount(new_reply_count => new_reply_count + 1)
+            handleExpand()
+            let newNestedReplies = [...nestedReplies, data]
+            setNestedReplies(newNestedReplies)
+          } else {
+            alert('empty post')
+          }
+          
         })
       })
     }
@@ -134,7 +141,7 @@ export default function Reply({reply, user, postId}) {
                     <p>{reply.content}</p>
                 </blockquote>
             </div>
-            <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {reply.reply_count} {reply.reply_count===1 ? 'reply' : 'replies'}</p>
+            <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
             <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
             <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
             {replies ? (

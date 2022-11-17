@@ -39,9 +39,13 @@ export default function Home({user}) {
     .then(r => r.json())
     .then(post => {
       console.log(post)
-      setPosts([...posts, post])
-      setContent('')
-      setNewPost(false)
+      if (post.id) {
+        setPosts([...posts, post])
+        setContent('')
+        setNewPost(false)
+      } else {
+        alert('empty post')
+      }
     })
   }
 
