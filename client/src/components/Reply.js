@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
-export default function Reply({reply, user, postId}) {
+export default function Reply({reply, user, postId, setReplies, replies}) {
     const [liked, setLiked] = useState(false)
     const [likes, setLikes] = useState(reply.like_count)
     const [replyCount, setReplyCount] = useState(reply.reply_count)
     const [expand, setExpand] = useState(false)
     const [nestedReplies, setNestedReplies] = useState([])
-    const [replies, setReplies] = useState(false)
+    const [showReplies, setShowReplies] = useState(false)
     const [content, setContent] = useState('')
-    // console.log(reply.id, user.id)
+
+    // console.log(reply)
+    const navigate = useNavigate()
 
     function handleExpand() {
       if (!expand) {
@@ -80,7 +84,7 @@ export default function Reply({reply, user, postId}) {
     }
 
     function handleReplyClick() {
-        setReplies(!replies)
+        setShowReplies(!showReplies)
     }
 
     function handleContentChange(e) {
@@ -121,20 +125,45 @@ export default function Reply({reply, user, postId}) {
           if (data.id) {
             setReplyCount(replyCount => replyCount + 1)
             setContent('')
-            handleExpand()
-            let newNestedReplies = [...nestedReplies, data]
-            setNestedReplies(newNestedReplies)
+            fetch(`/replies/${reply.id}`, {
+              method: 'GET',
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem('jwt')}`
+              }
+            })
+            .then(r => r.json())
+            .then(data => {
+              setNestedReplies(data)
+              setExpand(true)
+            })
           } else {
-            alert('empty post')
+            alert(data.exception)
           }
 
         })
       })
     }
+
+    function toViewProfile() {
+      navigate(`/profile/${reply.user.id}`)
+    }
+
+    function handleDelete() {
+      fetch(`/replies/${reply.id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+      })
+      setReplies(replies.filter(r => r.id !== reply.id))
+    }
+
   return (
+
     <div className='replyDiv'>
         <div className='card replyCard'>
-            <div className="card-header">
+            {user.id===reply.user.id ? <div className="delete-post" onClick={() => handleDelete(reply.id)}>X</div> : null}
+            <div className="card-header" onClick={toViewProfile}>
                 {reply.user.username}
             </div>
             <div className="card-body">
@@ -145,7 +174,7 @@ export default function Reply({reply, user, postId}) {
             <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
             <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
             <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
-            {replies ? (
+            {showReplies ? (
               <form onSubmit={handleReplySubmit}>
                 <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
                 <input type="submit" className="form-control" value="Post" />
@@ -154,7 +183,7 @@ export default function Reply({reply, user, postId}) {
         </div>
         {expand ? (
             nestedReplies.map(reply => {
-                return <Reply key={reply.id} user={user} postId={postId} reply={reply}/>
+                return <Reply key={reply.id} user={user} postId={postId} reply={reply} setReplies={setReplies} replies={replies}/>
             })
         ) : null } 
     </div>

@@ -1,10 +1,11 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :replies
-  has_many :likes
+  has_many :replies, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_many :users, through: :likes
 
   validates :content, presence: true
+  validates :content, length: { maximum: 140 }
 
   def likes_count
     self.likes.count

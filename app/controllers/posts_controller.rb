@@ -10,13 +10,18 @@ class PostsController < ApplicationController
     end
 
     def create
-        post = Post.create(post_params)
+        post = Post.create!(post_params)
         render json: post, status: :created
     end
 
     def user_posts
         posts = Post.where(user_id: params[:user_id])
         render json: posts, status: :ok
+    end
+
+    def destroy
+        Post.find(params[:id]).destroy
+        head :no_content
     end
 
     private

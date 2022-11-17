@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function UserCard({cardUser, user}) {
+    const navigate = useNavigate()
     const [alreadyFollowing, setAlreadyFollowing] = useState(false)
     const [buttonToggle, setButtonToggle] = useState(user.following.map(user => user.id).includes(cardUser.id))
 
@@ -37,9 +39,13 @@ export default function UserCard({cardUser, user}) {
 
     // console.log(user.following.map(user => user.id), cardUser.id)
 
+    function handleClick() {
+        navigate(`/profile/${cardUser.id}`)
+    }
+
   return (
     <div className='userCard'>
-        <div className="card"> 
+        <div className="card" onClick={handleClick}> 
             {!!cardUser.avatar ? <img className="card-img-top" src={cardUser.avatar} alt="avatar"/> : <h1>👤</h1>}
             <h5 className="card-title">{cardUser.username}</h5>
             <p className="card-text">{cardUser.bio}</p>

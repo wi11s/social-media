@@ -9,6 +9,11 @@ class RepliesController < ApplicationController
         render json: reply, status: :created
     end
 
+    def destroy
+        Reply.find(params[:id]).destroy
+        head :no_content
+    end
+
     private
 
     def reply_params

@@ -83,7 +83,16 @@ export default function Login({ onLogin }) {
 
   return (
     <div id="login">
-      <motion.div style={{ rotate }}>
+      <motion.div 
+        className="box"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0,
+          ease: [0, 0.71, 0.2, 1.01]
+        }}
+      >
       {signup ? (
         <div className="signUpForm">
           <form onSubmit={handleSignupSubmit}>
@@ -96,10 +105,24 @@ export default function Login({ onLogin }) {
               <input className='form-control' type='password' placeholder='password' onChange={handlePasswordChange}/>
               <input className='form-control' type='password' placeholder='password' onChange={handlePasswordConfirmationChange}/>
             </div>
-            {password===passwordConfirmation ? <button id='loginSubmit' className="btn btn-primary" type='submit'>Sign Up</button> : <p>Passwords do not match</p>}
+            {password===passwordConfirmation ? (
+              <motion.div
+                className="box"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                <button id='loginSubmit' className="btn btn-primary" type='submit'>Sign Up</button>
+              </motion.div>
+            ) : <p>Passwords do not match</p>}
           </form>
           <p className='loginText'>Already have an account?</p>
-          <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Log In</button>
+          <motion.div
+            className="box"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Log In</button>
+          </motion.div>
         </div>
       ) : (
         <div className="signUpForm">
@@ -112,10 +135,22 @@ export default function Login({ onLogin }) {
               <label for="exampleInputPassword1">Password</label>
               <input className='form-control' type='password' placeholder='password' onChange={handlePasswordChange}/>
             </div>
-            <button id='loginSubmit' className="btn btn-primary" type='submit'>Login</button>
+            <motion.div
+              className="box"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <button id='loginSubmit' className="btn btn-primary" type='submit'>Login</button>
+            </motion.div>
           </form>
           <p className='loginText'>Don't have an account?</p>
-          <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Sign Up</button>
+          <motion.div
+            className="box"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <button className="btn btn-primary" onClick={() => setSignup(!signup)}>Sign Up</button>
+          </motion.div>
         </div>
         )}
         </motion.div>

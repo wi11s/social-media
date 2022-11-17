@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import Replies from './Replies'
+import React, { useState, useEffect } from 'react';
+import Replies from './Replies';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-export default function Post({post, username, user}) {
+export default function Post({post, username, user, setPosts, posts}) {
   // console.log(post)
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes_count)
@@ -9,6 +11,8 @@ export default function Post({post, username, user}) {
   const [expand, setExpand] = useState(false)
   const [replies, setReplies] = useState(false)
   const [content, setContent] = useState('')
+  const [replyingState, setReplyingState] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`/like/${user.id}/${post.id}`, {
@@ -91,17 +95,39 @@ export default function Post({post, username, user}) {
       console.log(data)
       if (data.id) {
         setExpand(true)
+        setReplyingState(!replyingState)
         setReplyCount(replyCount => replyCount + 1)
       } else {
-        alert("empty post")
+        alert(data.exception)
       }
     })
   }
 
+  function toViewProfile() {
+    navigate(`/profile/${post.user.id}`)
+  }
+
+  function handleDelete() {
+    fetch(`/posts/${post.id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+    })
+
+    setPosts(posts.filter(p => p.id !== post.id))
+  }
+
   return (
+
     <div className="post">
       <div className='card'>
-        <div className="card-header">
+        {post.user.id === user.id ? <div className="delete-post" onClick={() => handleDelete(post.id)}>X</div> : null}
+        <div className="card-header" onClick={toViewProfile}>
           {username}
         </div>
         <div className="card-body">
@@ -119,7 +145,7 @@ export default function Post({post, username, user}) {
           </form>
         ) : null}
       </div>
-      {expand ? <Replies user={user} postId={post.id}/> : null}
+      {expand ? <Replies user={user} postId={post.id} replyCount={replyCount}/> : null}
     </div>
   )
 }
