@@ -100,26 +100,30 @@ export default function Post({post, username, user}) {
 
   return (
     <div className="post">
-      <div className='card'>
+      <div className='cardAtHome'>
+      <div className="card-home-upper">
         <div className="card-header">
           {username}
         </div>
-        <div className="card-body">
+        <div className="card-body-home">
           <blockquote className="blockquote mb-0">
             <p className='postContent'>{post.content}</p>
           </blockquote>
         </div>
+      </div>
         <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
         <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
+        </div>
+        <div className='newPost'>
         {replies ? (
-          <form onSubmit={handleReplySubmit}>
-            <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
-            <input type="submit" className="form-control" value="Post" />
+          <form className="replyForm" onSubmit={handleReplySubmit}>
+            <input type="text" className="form-control-reply form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
+            <input type="submit" className="form-control-reply-button form-control" value="Post" />
           </form>
         ) : null}
-      </div>
       {expand ? <Replies user={user} postId={post.id}/> : null}
+      </div>
     </div>
   )
 }

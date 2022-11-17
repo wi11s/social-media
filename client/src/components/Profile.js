@@ -6,6 +6,8 @@ export default function Profile({user}) {
   const [username, setUsername] = useState(user.username)
   const [avatar, setAvatar] = useState('')
   const [bio, setBio] = useState(user.bio)
+  const [location, setLocation] = useState(user.location)
+  const [birthday, setBirthday] = useState(user.birthday)
   const [posts, setPosts] = useState([])
   // console.log(user)
 
@@ -20,6 +22,14 @@ export default function Profile({user}) {
 
   function handleBioChange(e) {
     setBio(e.target.value)
+  }
+
+  function handleLocationChange(e) {
+    setLocation(e.target.value)
+  }
+
+  function handleBirthdayChange(e) {
+    setBirthday(e.target.value)
   }
 
   function handleAvatarChange(e) {
@@ -38,7 +48,9 @@ export default function Profile({user}) {
       body: JSON.stringify({
         username: username,
         bio: bio,
-        avatar: avatar
+        avatar: avatar,
+        location: location,
+        birthday: birthday
       })
     })
     .then(res => res.json())
@@ -47,8 +59,13 @@ export default function Profile({user}) {
       setUpdating(false)
       setUsername(data.username)
       setBio(data.bio)
+      setLocation(data.location)
+      setBirthday(data.birthday)
     })
   }
+  
+
+  console.log(setLocation)
 
   useEffect(() => {
     fetch(`/posts/${user.id}`, {
@@ -64,7 +81,7 @@ export default function Profile({user}) {
     })
     }, [])
 
-
+  
   return (
     <div>
     <div className="profile">
@@ -72,24 +89,19 @@ export default function Profile({user}) {
         <form onSubmit={handleSubmit} className='updateProfileForm'>
           <input className="form-control" type="text" name="username" placeholder="Username" value={username} onChange={handleUsernameChange}/>
           <input className="form-control" type="text" name="bio" placeholder="Bio" onChange={handleBioChange} value={bio}/>
+          <input className="form-control" type="text" name="location" placeholder="Location" onChange={handleLocationChange} value={location}/>
+          <input className="form-control" type="text" name="birthday" placeholder="Birthday" onChange={handleBirthdayChange} value={birthday}/>
           <input className="form-control" type="file" name="avatar" onChange={handleAvatarChange}/>
           <input className="form-control" type="submit"/>
         </form>
       ) : (
-      <div className="card">
+      <div className="card-profile">
         <img src={user.avatar} className="card-img-top" alt="..."/>
         <div className="card-body">
           <h5 className="card-title">{username}</h5>
-          <p className="card-text">{bio}</p>
-        </div>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">An item</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-        </ul>
-        <div className="card-body">
-          <a href="#" className="card-link">Card link</a>
-          <a href="#" className="card-link">Another link</a>
+          <p className="card-bio">{bio}</p>
+          <p className="card-location">{location}</p>
+          <p className="card-birthday">{birthday}</p>
         </div>
       </div>
       )}

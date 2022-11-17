@@ -39,7 +39,7 @@ export default function UserCard({cardUser, user}) {
 
   return (
     <div className='userCard'>
-        <div className="card"> 
+        <div className="cardInSearch"> 
             {!!cardUser.avatar ? <img className="card-img-top" src={cardUser.avatar} alt="avatar"/> : <h1>👤</h1>}
             <h5 className="card-title">{cardUser.username}</h5>
             <p className="card-text">{cardUser.bio}</p>

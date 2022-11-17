@@ -15,4 +15,5 @@ class User < ApplicationRecord
     def following
         self.followings.map {|follow| follow.followed}
     end
+
 end

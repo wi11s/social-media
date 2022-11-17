@@ -132,7 +132,8 @@ export default function Reply({reply, user, postId}) {
     }
   return (
     <div className='replyDiv'>
-        <div className='card replyCard'>
+        <div className='ReplyCard'>
+            <div className='card-reply-upper'>
             <div className="card-header">
                 {reply.user.username}
             </div>
@@ -141,16 +142,17 @@ export default function Reply({reply, user, postId}) {
                     <p>{reply.content}</p>
                 </blockquote>
             </div>
+            </div>
             <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
             <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
             <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
+        </div>
             {replies ? (
-              <form onSubmit={handleReplySubmit}>
-                <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
-                <input type="submit" className="form-control" value="Post" />
+              <form className="replyForm" onSubmit={handleReplySubmit}>
+                <input type="text" className="form-control-reply form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
+                <input type="submit" className="form-control-reply-button form-control" value="Post" />
               </form>
             ) : null}
-        </div>
         {expand ? (
             nestedReplies.map(reply => {
                 return <Reply key={reply.id} user={user} postId={postId} reply={reply}/>

@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   validates :content, length: { maximum: 140 }
 
 
+
   def likes_count
     self.likes.count
   end

@@ -35,7 +35,8 @@ Reply.create(content: 'helllll0000', image: '', post_id: 2)
 Reply.create(content: 'yes', image: '', post_id: 1)
 Reply.create(content: 'fidsajfi;asjdf;iasdj', image: '',post_id: 2)
 
-Like.create(post_id: 1, user_id: 1, reply_id: 1)
+Like.create(post_id: 1, user_id: 1)
+
 
 JoinReply.create(parent_reply_id: 1, child_reply_id: 2)
 JoinReply.create(parent_reply_id: 1, child_reply_id: 4)
