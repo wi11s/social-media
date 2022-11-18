@@ -305,6 +305,8 @@ body {
 
 .profile {
   padding: 3%;
+  display: block;
+  overflow: auto;
 }
 
 .updateProfileForm {
