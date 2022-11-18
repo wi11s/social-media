@@ -200,5 +200,6 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
             })
         ) : null } 
     </div>
+    </div>
   )
 }
