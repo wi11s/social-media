@@ -128,10 +128,11 @@ export default function Post({post, username, user, setPosts, posts}) {
 
       <div className='cardAtHome'>
       <div className="card-home-upper">
-        {post.user.id === user.id ? <div className="delete-post" onClick={() => handleDelete(post.id)}>X</div> : null}
         <div className="card-header" onClick={toViewProfile}>
-          {username}
+          {username} 
+          {post.user.id === user.id ? <div className="delete-post" onClick={() => handleDelete(post.id)}>X</div> : null}
         </div>
+       
         <div className="card-body-home">
           <blockquote className="blockquote mb-0">
             <p className='postContent'>{post.content}</p>
@@ -139,7 +140,7 @@ export default function Post({post, username, user, setPosts, posts}) {
         </div>
       </div>
         <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
-        <p>Created at {post.created_at}</p>
+        {/* <p>Created at {post.created_at}</p> */}
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
         <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
         </div>
