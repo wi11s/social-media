@@ -64,8 +64,7 @@ export default function Profile({user}) {
     })
   }
   
-
-  console.log(setLocation)
+ 
 
   useEffect(() => {
     fetch(`/posts/${user.id}`, {
@@ -96,7 +95,7 @@ export default function Profile({user}) {
         </form>
       ) : (
       <div className="card-profile">
-        <img src={user.avatar} className="card-img-top" alt="..."/>
+        <img src={user.avatar} className="card-img-profile" alt="..."/>
         <div className="card-body">
           <h5 className="card-title">{username}</h5>
           <p className="card-bio">{bio}</p>
@@ -105,13 +104,15 @@ export default function Profile({user}) {
         </div>
       </div>
       )}
+
+      <button className='btn btn-secondary' onClick={handleUpdate}>{updating ? 'cancel' : 'update'}</button>
     </div>
     <div className='userPostsOnProfile'>
       {posts.map(post => {
         return <Post post={post} username={username} user={user}/>
       })}
+  
     </div>
-      <button className='btn btn-secondary' onClick={handleUpdate}>{updating ? 'cancel' : 'update'}</button>
     </div>
   )
 }

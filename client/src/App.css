@@ -74,7 +74,7 @@ body {
 }
 
 .card-title {
-  padding: 2%;
+  padding: 5%;
 }
 
 .card-header {
@@ -94,7 +94,7 @@ body {
 }
 
 .postContent {
-  word-break: break-all;
+  word-break: normal;
   white-space: normal;
   width: 100%;
 }
@@ -224,6 +224,12 @@ body {
   right: 30%;
 }
 
+.btn-secondary {
+  position: sticky;
+}
+
+.btn-secondary
+
 .signUpForm {
   background-color: rgb(255, 255, 255);
   padding: 10%;
@@ -275,6 +281,20 @@ body {
   width: 80px;
   border-radius: 50%;
   padding: 3%;
+}
+
+.card-img-profile {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+
+.profile {
+  padding: 5%;
+}
+
+.updateProfileForm {
+  padding-top: 8%;
 }
 
 .newPostSubmit {
