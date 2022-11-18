@@ -148,7 +148,7 @@ export default function Post({post, username, user, setPosts, posts}) {
           </blockquote>
         </div>
       </div>
-        <p onClick={handleExpand} className="replyCount">{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
+        <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
         {/* <p>Created at {post.created_at}</p> */}
        
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>

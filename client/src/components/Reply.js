@@ -179,9 +179,9 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
                 {reply.user.username}
             </div>
             <motion.div
-              className="box"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            className="box"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               {user.id===reply.user.id ? <div className="btn btn-danger delete-post" onClick={() => handleDelete(reply.id)}>X</div> : null}
             </motion.div>
@@ -194,7 +194,7 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
                 </blockquote>
             </div>
 
-            <p className="reply-counts replyCount" onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
+            <p className="reply-counts" onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
             </div>
            
             <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
@@ -212,6 +212,7 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
                 >
                   <input type="submit" className="form-control-reply-button form-control" value="Post" />
                 </motion.div>
+
               </form>
             ) : null}
         {expand ? (
@@ -220,5 +221,6 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
             })
         ) : null } 
     </div>
+    // </div>
   )
 }

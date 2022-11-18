@@ -16,16 +16,8 @@ export default function Home({user}) {
   })
   .then(r => r.json())
   .then(posts => {
-    // console.log(posts.filter(post => user.following.includes(post.user.id)))
-    let arrayOfFollowingIds = []
-    user.following.map(following => arrayOfFollowingIds.push(following.id))
-    // console.log(arrayOfFollowingIds)
-    // posts.map(post => {
-    //   console.log(user.following[0]===post.user)
-    // })
-    let filteredPosts = posts.filter(post => arrayOfFollowingIds.includes(post.user.id))
-    console.log(filteredPosts)
-    setPosts(filteredPosts.sort((a, b) => b.created_at - a.created_at))
+    console.log(posts)
+    setPosts(posts.sort((a, b) => b.created_at - a.created_at))
   })
   }, [])
 

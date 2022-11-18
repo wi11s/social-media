@@ -122,10 +122,6 @@ body {
   right: 2%;
 }
 
-.replyCount:hover {
-  cursor: pointer;
-}
-
 .navbar {
   background-color: #66806A;
 }
