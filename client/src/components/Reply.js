@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-export default function Reply({reply, user, postId, setReplies, replies}) {
+export default function Reply({reply, user, postId, setReplies, replies, setParentReplyCount, parentReplyCount}) {
     const [liked, setLiked] = useState(false)
     const [likes, setLikes] = useState(reply.like_count)
     const [replyCount, setReplyCount] = useState(reply.reply_count)
@@ -139,6 +139,7 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
             .then(data => {
               setNestedReplies(data)
               setExpand(true)
+              setShowReplies(false)
             })
           } else {
             alert(data.exception)
@@ -161,6 +162,7 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
       })
 
       setReplies(replies.filter(r => r.id !== reply.id))
+      setParentReplyCount(parentReplyCount => parentReplyCount - 1)
     }
     
   return (
@@ -188,7 +190,7 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
         </div>
         {expand ? (
             nestedReplies.map(reply => {
-                return <Reply key={reply.id} user={user} postId={postId} reply={reply} setReplies={setNestedReplies} replies={nestedReplies}/>
+                return <Reply key={reply.id} user={user} postId={postId} reply={reply} setReplies={setNestedReplies} replies={nestedReplies} parentReplyCount={replyCount} setParentReplyCount={setReplyCount}/>
             })
         ) : null } 
     </div>

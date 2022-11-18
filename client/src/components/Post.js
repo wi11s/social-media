@@ -146,7 +146,7 @@ export default function Post({post, username, user, setPosts, posts}) {
           </form>
         ) : null}
       </div>
-      {expand ? <Replies user={user} postId={post.id} replyCount={replyCount}/> : null}
+      {expand ? <Replies user={user} postId={post.id} replyCount={replyCount} setParentReplyCount={setReplyCount} parentReplyCount={replyCount}/> : null}
     </div>
   )
 }

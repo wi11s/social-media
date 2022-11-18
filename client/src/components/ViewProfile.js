@@ -22,9 +22,9 @@ export default function ViewProfile({user}) {
       }
     })
     .then(r => r.json())
-    .then(user => {
+    .then(data => {
       // console.log(user)
-      setUserViewing(user)
+      setUserViewing(data)
     })
     }, [])
 
@@ -90,7 +90,7 @@ export default function ViewProfile({user}) {
     </div>
     <div className='userPostsOnProfile'>
       {posts.map(post => {
-        return <Post post={post} username={userViewing.username} user={userViewing}/>
+        return <Post key={post.id} post={post} username={userViewing.username} user={user}/>
       })}
     </div>
     </div>
