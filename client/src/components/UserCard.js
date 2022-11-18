@@ -45,12 +45,12 @@ export default function UserCard({cardUser, user}) {
 
   return (
     <div className='userCard'>
-        <div className="cardInSearch" onClick={handleClick}> 
-            {!!cardUser.avatar ? <img className="card-img-top" src={cardUser.avatar} alt="avatar"/> : <h1>👤</h1>}
-            <h5 className="card-title">{cardUser.username}</h5>
-            <p className="card-text">{cardUser.bio}</p>
-            <a href="#" className="btn btn-primary" onClick={handleFollowOrUnfollow}>{ buttonToggle ? 'unfollow' : 'follow' }</a>
-        </div>
+            <div className="cardInSearch"> 
+                {!!cardUser.avatar ? <img onClick={handleClick} className="card-img-top" src={cardUser.avatar} alt="avatar"/> : <h1>👤</h1>}
+                <h5 className="card-title">{cardUser.username}</h5>
+                <p className="card-text">{cardUser.bio}</p>  
+                <a href="#" className="btn btn-primary" onClick={handleFollowOrUnfollow}>{ buttonToggle ? 'unfollow' : 'follow' }</a>
+            </div>
     </div>
   )
 }

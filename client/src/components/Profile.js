@@ -33,8 +33,8 @@ export default function Profile({user}) {
   }
 
   function handleAvatarChange(e) {
-    // console.log(URL.createObjectURL(e.target.files[0]).slice(5))
-    setAvatar(URL.createObjectURL(e.target.files[0]).slice(5))
+    
+    setAvatar(e.target.value)
   }
 
   function handleSubmit(e) {
@@ -61,6 +61,7 @@ export default function Profile({user}) {
       setBio(data.bio)
       setLocation(data.location)
       setBirthday(data.birthday)
+      setAvatar(data.avatar)
     })
   }
 
@@ -87,7 +88,7 @@ export default function Profile({user}) {
           <input className="form-control" type="text" name="bio" placeholder="Bio" onChange={handleBioChange} value={bio}/>
           <input className="form-control" type="text" name="location" placeholder="Location" onChange={handleLocationChange} value={location}/>
           <input className="form-control" type="text" name="birthday" placeholder="Birthday" onChange={handleBirthdayChange} value={birthday}/>
-          <input className="form-control" type="file" name="avatar" onChange={handleAvatarChange}/>
+          <input className="form-control" type="text" name="avatar" placeholder="profile image URL" onChange={handleAvatarChange}/>
           <input className="form-control" type="submit"/>
         </form>
       ) : (
@@ -99,6 +100,7 @@ export default function Profile({user}) {
           <p className="card-bio">{bio}</p>
           <p className="card-location">{location}</p>
           <p className="card-birthday">{birthday}</p>
+          
           <p>{user.followers.length} {user.followers.length===1 ? 'Follower' : 'Followers'}</p>
           <p>{user.following.length} Following</p>
         </div>
