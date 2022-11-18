@@ -125,28 +125,35 @@ export default function Post({post, username, user, setPosts, posts}) {
   return (
 
     <div className="post">
-      <div className='card'>
+
+      <div className='cardAtHome'>
+      <div className="card-home-upper">
         {post.user.id === user.id ? <div className="delete-post" onClick={() => handleDelete(post.id)}>X</div> : null}
         <div className="card-header" onClick={toViewProfile}>
           {username}
         </div>
-        <div className="card-body">
+        <div className="card-body-home">
           <blockquote className="blockquote mb-0">
-            <p>{post.content}</p>
+            <p className='postContent'>{post.content}</p>
           </blockquote>
         </div>
+      </div>
         <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
         <p>Created at {post.created_at}</p>
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
         <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
+        </div>
+        <div className='newPost'>
         {replies ? (
-          <form onSubmit={handleReplySubmit}>
-            <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
-            <input type="submit" className="form-control" value="Post" />
+          <form className="replyForm" onSubmit={handleReplySubmit}>
+            <input type="text" className="form-control-reply form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
+            <input type="submit" className="form-control-reply-button form-control" value="Post" />
           </form>
         ) : null}
       </div>
+
       {expand ? <Replies user={user} postId={post.id} replyCount={replyCount} setParentReplyCount={setReplyCount} parentReplyCount={replyCount}/> : null}
+
     </div>
   )
 }

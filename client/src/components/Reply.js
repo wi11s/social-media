@@ -144,7 +144,6 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
           } else {
             alert(data.exception)
           }
-
         })
       })
     }
@@ -168,7 +167,10 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
   return (
 
     <div className='replyDiv'>
-        <div className='card replyCard'>
+
+        <div className='ReplyCard'>
+            <div className='card-reply-upper'>
+        <div className='ReplyCard'>
             {user.id===reply.user.id ? <div className="delete-post" onClick={() => handleDelete(reply.id)}>X</div> : null}
             <div className="card-header" onClick={toViewProfile}>
                 {reply.user.username}
@@ -178,16 +180,20 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
                     <p>{reply.content}</p>
                 </blockquote>
             </div>
+            </div>
             <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
             <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
             <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
+
+        </div>
+ 
             {showReplies ? (
               <form onSubmit={handleReplySubmit}>
                 <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
                 <input type="submit" className="form-control" value="Post" />
+
               </form>
             ) : null}
-        </div>
         {expand ? (
             nestedReplies.map(reply => {
                 return <Reply key={reply.id} user={user} postId={postId} reply={reply} setReplies={setNestedReplies} replies={nestedReplies} parentReplyCount={replyCount} setParentReplyCount={setReplyCount}/>

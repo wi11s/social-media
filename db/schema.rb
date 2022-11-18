@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_181719) do
     t.string "password_digest"
     t.string "avatar"
     t.text "bio"
-    t.integer "birthday"
+    t.string "birthday"
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
