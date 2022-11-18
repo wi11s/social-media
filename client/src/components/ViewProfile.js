@@ -77,8 +77,8 @@ export default function ViewProfile({user}) {
   return (
     <div>
     <div className="profile">
-      <div className="card">
-        <img src={userViewing.avatar} className="card-img-top" alt="..."/>
+      <div className="card-profile">
+        <img src={userViewing.avatar} className="card-img-profile" alt="..."/>
         <div className="card-body">
           <h5 className="card-title">{userViewing.username}</h5>
           <p className="card-text">{userViewing.bio}</p>
