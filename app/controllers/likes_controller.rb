@@ -15,7 +15,7 @@ class LikesController < ApplicationController
         render json: like, status: :created
     end
 
-    def destroy
+    def destroy_single
         like = find_like
         like.destroy!
     end
@@ -23,6 +23,11 @@ class LikesController < ApplicationController
     def destroy_reply_like
         like = find_like
         like.destroy!
+    end
+
+    def destroy
+        Like.find(params[:id]).destroy
+        head :no_content
     end
 
     private

@@ -5,6 +5,7 @@ import Header from './Header';
 import Profile from './Profile';
 import Search from './Search';
 import NotFound from './NotFound';
+import ViewProfile from './ViewProfile';
 import { Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 
@@ -28,6 +29,8 @@ function App() {
 
   if (!user) return (<div className="login"><Login onLogin={setUser} /></div>);
 
+  // console.log(user)
+
   return (
     <div className="App">
       <Header setUser={setUser}/>
@@ -36,6 +39,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/profile" element={<Profile user={user}/>} />
         <Route path="/search" element={<Search user={user}/>} />
+        <Route path="/profile/:id" element={<ViewProfile user={user}/>} />
       </Routes>
     </div>
   );

@@ -16,4 +16,8 @@ class User < ApplicationRecord
         self.followings.map {|follow| follow.followed}
     end
 
+    def followers
+        self.followeds.map {|follow| follow.follower}
+    end
+
 end

@@ -98,9 +98,12 @@ export default function Profile({user}) {
         <img src={user.avatar} className="card-img-profile" alt="..."/>
         <div className="card-body">
           <h5 className="card-title">{username}</h5>
+
           <p className="card-bio">{bio}</p>
           <p className="card-location">{location}</p>
           <p className="card-birthday">{birthday}</p>
+          <p>{user.followers.length} {user.followers.length===1 ? 'Follower' : 'Followers'}</p>
+          <p>{user.following.length} Following</p>
         </div>
       </div>
       )}

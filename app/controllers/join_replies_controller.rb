@@ -1,7 +1,7 @@
 class JoinRepliesController < ApplicationController
     def create 
-        join_replies = JoinReply.create!(join_reply_params)
-        render json: join_replies, status: :created
+        join_reply = JoinReply.create!(join_reply_params)
+        render json: join_reply, status: :created
     end
 
     private

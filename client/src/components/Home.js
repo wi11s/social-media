@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
+import {motion } from 'framer-motion'
 
 export default function Home({user}) {
   const [posts, setPosts] = useState([])
@@ -15,7 +16,8 @@ export default function Home({user}) {
   })
   .then(r => r.json())
   .then(posts => {
-    setPosts(posts)
+    console.log(posts)
+    setPosts(posts.sort((a, b) => b.created_at - a.created_at))
   })
   }, [])
 
@@ -43,20 +45,32 @@ export default function Home({user}) {
         setContent('')
         setNewPost(false)
       } else {
-        alert('empty post')
+        console.log(post.error)
+        alert(post.exception)
       }
     })
   }
 
   return (
     <div id="posts">
+      <motion.div
+        className="box"
+        initial={{ opacity: 0, scale: 0.6 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0,
+          ease: [0, 0.71, 0.2, 1.01]
+        }}
+      >
         <form onSubmit={handleSubmit} className='newPost'>
           <input className="form-control" type="text" placeholder="What's on your mind?" onChange={handleChange}/>
           <input className="form-control newPostSubmit" type="submit" />
         </form>
         {posts.map(post => {
-          return <Post key={post.id} post={post} username={post.user.username} user={user}/>
+          return <Post key={post.id} post={post} posts={posts} setPosts={setPosts} username={post.user.username} user={user}/>
         })}
+      </motion.div>
     </div>
   )
 }
