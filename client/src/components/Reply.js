@@ -7,12 +7,16 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
     const [likes, setLikes] = useState(reply.like_count)
     const [replyCount, setReplyCount] = useState(reply.reply_count)
     const [expand, setExpand] = useState(false)
-    const [nestedReplies, setNestedReplies] = useState([])
+    const [nestedReplies, setNestedReplies] = useState(replies)
     const [showReplies, setShowReplies] = useState(false)
     const [content, setContent] = useState('')
 
     // console.log(reply)
     const navigate = useNavigate()
+
+    function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
+    }
 
     function handleExpand() {
       if (!expand) {
@@ -24,8 +28,8 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
         })
         .then(r => r.json())
         .then(data => {
-          // console.log(data)
-          setNestedReplies(data)
+          console.log(data)
+          setNestedReplies(data.sort((a, b) => b.like_count - a.like_count).filter(onlyUnique))  
           setExpand(true)
         })
       } else {
@@ -107,7 +111,7 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
       })
       .then(r => r.json())
       .then(data => {
-        console.log(data)
+        console.log(reply.id, data.id)
         fetch('/join_replies', {
           method: 'POST',
           headers: {
@@ -120,8 +124,8 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
           })
         })
         .then(r => r.json())
-        .then((data) => {
-          console.log(data)
+        .then((joinData) => {
+          console.log(joinData)
           if (data.id) {
             setReplyCount(replyCount => replyCount + 1)
             setContent('')
@@ -155,9 +159,10 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
           Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
       })
+
       setReplies(replies.filter(r => r.id !== reply.id))
     }
-
+    
   return (
 
     <div className='replyDiv'>
@@ -183,7 +188,7 @@ export default function Reply({reply, user, postId, setReplies, replies}) {
         </div>
         {expand ? (
             nestedReplies.map(reply => {
-                return <Reply key={reply.id} user={user} postId={postId} reply={reply} setReplies={setReplies} replies={replies}/>
+                return <Reply key={reply.id} user={user} postId={postId} reply={reply} setReplies={setNestedReplies} replies={nestedReplies}/>
             })
         ) : null } 
     </div>

@@ -10,6 +10,7 @@ class Reply < ApplicationRecord
 
   validates :content, presence: true
   validates :content, length: { maximum: 140 }
+  validates :id, uniqueness: true
 
   def like_count
     likes.count

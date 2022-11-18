@@ -1,6 +1,6 @@
 class RepliesController < ApplicationController
-    def show
-        replies = Reply.find(params[:id]).replies
+    def show_nested
+        replies = Reply.find(params[:parent_reply_id]).replies
         render json: replies
     end
 

@@ -9,13 +9,14 @@ Rails.application.routes.draw do
   get "/posts/replies/:post_id", to: "posts#replies"
   delete "/follows/:followed_id/:follower_id", to: "follows#destroy"
   get "/posts/:user_id", to: "posts#user_posts"
+  get "/replies/:parent_reply_id", to: "replies#show_nested"
 
   
 
   resources :join_replies, only: [:create]
   resources :follows, only: [:create]
   resources :likes, only: [:create, :destroy]
-  resources :replies, only: [:show, :create, :destroy]
+  resources :replies, only: [:create, :destroy]
   resources :posts, only: [:index, :create, :destroy]
   resources :users, only: [:index, :create, :update, :show]
 end

@@ -16,7 +16,8 @@ export default function Home({user}) {
   })
   .then(r => r.json())
   .then(posts => {
-    setPosts(posts)
+    console.log(posts)
+    setPosts(posts.sort((a, b) => b.created_at - a.created_at))
   })
   }, [])
 
