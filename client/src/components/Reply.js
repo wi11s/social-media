@@ -170,18 +170,21 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
 
         <div className='ReplyCard'>
             <div className='card-reply-upper'>
-        <div className='ReplyCard'>
-            {user.id===reply.user.id ? <div className="delete-post" onClick={() => handleDelete(reply.id)}>X</div> : null}
-            <div className="card-header" onClick={toViewProfile}>
+        {/* <div className='ReplyCard'> */}
+          
+            <div className="card-header-replyr" onClick={toViewProfile}>
                 {reply.user.username}
+                {user.id===reply.user.id ? <div className="delete-post-reply" onClick={() => handleDelete(reply.id)}>X</div> : null}
             </div>
             <div className="card-body">
                 <blockquote className="blockquote mb-0">
                     <p>{reply.content}</p>
                 </blockquote>
             </div>
+
+            <p className="reply-counts" onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
             </div>
-            <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
+           
             <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
             <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
 
@@ -199,7 +202,6 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
                 return <Reply key={reply.id} user={user} postId={postId} reply={reply} setReplies={setNestedReplies} replies={nestedReplies} parentReplyCount={replyCount} setParentReplyCount={setReplyCount}/>
             })
         ) : null } 
-    </div>
     </div>
   )
 }

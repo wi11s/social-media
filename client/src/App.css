@@ -208,8 +208,9 @@ body {
   background-color: #F6F6F6;
   flex-direction: row;
   justify-content: space-between;
-  width: 50%;
+  width: 100%;
 }
+
 
 .replyDiv {
   margin-left: 10%;
