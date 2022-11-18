@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
+import { motion } from 'framer-motion'
 
 export default function Profile({user}) {
   const [updating, setUpdating] = useState(false)
@@ -106,8 +107,13 @@ export default function Profile({user}) {
         </div>
       </div>
       )}
-
-      <button className='btn btn-secondary' onClick={handleUpdate}>{updating ? 'cancel' : 'update'}</button>
+      <motion.div
+        className="box"
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      >
+        <button className='btn btn-secondary' onClick={handleUpdate}>{updating ? 'cancel' : 'update'}</button>
+      </motion.div>
     </div>
     <div className='userPostsOnProfile'>
       {posts.map(post => {
