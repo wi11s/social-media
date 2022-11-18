@@ -174,7 +174,7 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
           
             <div className="card-header-replyr" onClick={toViewProfile}>
                 {reply.user.username}
-                {user.id===reply.user.id ? <div className="delete-post-reply" onClick={() => handleDelete(reply.id)}>X</div> : null}
+                {user.id===reply.user.id ? <div className="delete-post-reply btn" onClick={() => handleDelete(reply.id)}>X</div> : null}
             </div>
             <div className="card-body">
                 <blockquote className="blockquote mb-0">
@@ -191,10 +191,9 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
         </div>
  
             {showReplies ? (
-              <form onSubmit={handleReplySubmit}>
-                <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
-                <input type="submit" className="form-control" value="Post" />
-
+              <form onSubmit={handleReplySubmit} className="replyForm">
+                <input type="text" className="form-control-reply form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
+                <input type="submit" className="form-control-reply-button form-control" value="Post" />
               </form>
             ) : null}
         {expand ? (
