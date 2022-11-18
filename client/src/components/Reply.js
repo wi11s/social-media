@@ -159,9 +159,12 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
           Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
       })
+      .then(() => {
+        setReplies(replies.filter(r => r.id !== reply.id))
+        setParentReplyCount(parentReplyCount => parentReplyCount - 1)
+      })
 
-      setReplies(replies.filter(r => r.id !== reply.id))
-      setParentReplyCount(parentReplyCount => parentReplyCount - 1)
+      
     }
     
   return (
@@ -171,11 +174,20 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
         <div className='ReplyCard'>
             <div className='card-reply-upper'>
         {/* <div className='ReplyCard'> */}
-          
-            <div className="card-header-replyr" onClick={toViewProfile}>
+            <div className='username-delete-wrapper'>
+            <div className="card-header-reply" onClick={toViewProfile}>
                 {reply.user.username}
-                {user.id===reply.user.id ? <div className="delete-post-reply" onClick={() => handleDelete(reply.id)}>X</div> : null}
             </div>
+            <motion.div
+            className="box"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              {user.id===reply.user.id ? <div className="btn btn-danger delete-post" onClick={() => handleDelete(reply.id)}>X</div> : null}
+            </motion.div>
+            
+            </div>
+
             <div className="card-body">
                 <blockquote className="blockquote mb-0">
                     <p>{reply.content}</p>
@@ -191,9 +203,15 @@ export default function Reply({reply, user, postId, setReplies, replies, setPare
         </div>
  
             {showReplies ? (
-              <form onSubmit={handleReplySubmit}>
-                <input type="text" className="form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
-                <input type="submit" className="form-control" value="Post" />
+              <form className="replyForm" onSubmit={handleReplySubmit}>
+                <input type="text" className="form-control-reply form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <input type="submit" className="form-control-reply-button form-control" value="Post" />
+                </motion.div>
 
               </form>
             ) : null}

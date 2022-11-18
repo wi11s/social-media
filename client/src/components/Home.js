@@ -65,7 +65,13 @@ export default function Home({user}) {
       >
         <form onSubmit={handleSubmit} className='newPost'>
           <input className="form-control" type="text" placeholder="What's on your mind?" onChange={handleChange}/>
-          <input className="form-control newPostSubmit" type="submit" />
+          <motion.div
+            className="box"
+            whileHover={{ scale: 1.04 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <input className="form-control newPostSubmit" type="submit" value="Post"/>
+          </motion.div>
         </form>
         {posts.map(post => {
           return <Post key={post.id} post={post} posts={posts} setPosts={setPosts} username={post.user.username} user={user}/>

@@ -97,6 +97,7 @@ export default function Post({post, username, user, setPosts, posts}) {
         setExpand(true)
         setReplyingState(!replyingState)
         setReplyCount(replyCount => replyCount + 1)
+        setReplies(false)
       } else {
         alert(data.exception)
       }
@@ -128,9 +129,17 @@ export default function Post({post, username, user, setPosts, posts}) {
 
       <div className='cardAtHome'>
       <div className="card-home-upper">
+      <div className="wrapper">
         <div className="card-header" onClick={toViewProfile}>
           {username} 
-          {post.user.id === user.id ? <div className="delete-post" onClick={() => handleDelete(post.id)}>X</div> : null}
+        </div>
+          <motion.div
+            className="box"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+              {post.user.id === user.id ? <div className="btn btn-danger delete-post" onClick={() => handleDelete(post.id)}>x</div> : null}
+          </motion.div>
         </div>
        
         <div className="card-body-home">
@@ -141,14 +150,22 @@ export default function Post({post, username, user, setPosts, posts}) {
       </div>
         <p onClick={handleExpand}>{likes} {likes===1 ? 'like' : 'likes'} - {replyCount} {replyCount===1 ? 'reply' : 'replies'}</p>
         {/* <p>Created at {post.created_at}</p> */}
+       
         <button className='btn likeBtn' onClick={handleClick}>{liked ? '♥' : '♡'}</button>
         <button className='btn replyBtn' onClick={handleReplyClick}>💬</button>
+    
         </div>
         <div className='newPost'>
         {replies ? (
           <form className="replyForm" onSubmit={handleReplySubmit}>
             <input type="text" className="form-control-reply form-control" placeholder="Reply to this post" onChange={handleContentChange}/>
-            <input type="submit" className="form-control-reply-button form-control" value="Post" />
+            <motion.div
+            className="box"
+            whileHover={{ scale: 1.04 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <input type="submit" className="form-control-reply-button form-control" value="Post" />
+            </motion.div>
           </form>
         ) : null}
       </div>
