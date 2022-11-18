@@ -77,7 +77,7 @@ body {
   padding: 5%;
 }
 
-.card-header {
+.card-header, .card-header-reply {
   font-size: medium;
   font-weight: 700;
 }
@@ -120,6 +120,10 @@ body {
   position: absolute;
   bottom: 2%;
   right: 2%;
+}
+
+.replyCount:hover {
+  cursor: pointer;
 }
 
 .navbar {
@@ -202,6 +206,14 @@ body {
   margin-bottom: 3%;
 }
 
+.btn-danger {
+  border: none;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  padding: 5%;
+}
+
 
 .card-reply-upper {
   display: flex;
@@ -229,7 +241,7 @@ body {
   position: sticky;
 }
 
-.btn-secondary
+
 
 .signUpForm {
   background-color: rgb(255, 255, 255);
