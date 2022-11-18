@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Reply from './Reply'
 
-export default function Replies({postId, user, replyCount}) {
+export default function Replies({postId, user, replyCount, setParentReplyCount, parentReplyCount}) {
     const [replies, setReplies] = useState([])
     useEffect(() => {
         fetch(`/posts/replies/${postId}`, {
@@ -19,7 +19,7 @@ export default function Replies({postId, user, replyCount}) {
   return (
     <div>{replies.map(reply => {
         if (reply !== null) {
-            return <Reply user={user} postId={postId} key={reply.id} reply={reply} setReplies={setReplies} replies={replies}/>
+            return <Reply user={user} postId={postId} key={reply.id} reply={reply} setReplies={setReplies} replies={replies} setParentReplyCount={setParentReplyCount} parentReplyCount={parentReplyCount}/>
         }
     })}</div>
   )
