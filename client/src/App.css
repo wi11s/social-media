@@ -207,7 +207,7 @@ body {
   width: 20px;
   height: 20px;
   font-size: 10px;
-  padding: 5%;
+  padding: 5
 }
 
 
@@ -235,6 +235,7 @@ body {
 
 .btn-secondary {
   position: sticky;
+  margin-bottom: 20%;
 }
 
 
@@ -299,7 +300,7 @@ body {
 }
 
 .profile {
-  padding: 5%;
+  padding: 3%;
 }
 
 .updateProfileForm {
