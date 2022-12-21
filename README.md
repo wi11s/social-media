@@ -1,24 +1,9 @@
-# README
+# Welcome to our social media app!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+With our app, you can connect with friends and family by following their profiles, posting updates, and interacting with their content. You can also like posts and replies to show your support or join the conversation.
 
-Things you may want to cover:
+If you want to customize your profile, you can edit your profile information and profile picture at any time.
 
-* Ruby version
+Our app was built using React for the frontend and Ruby on Rails for the backend. To ensure the security of your account, we use bcrypt to encrypt your password on the backend and JWT to handle user sessions on the frontend.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+We hope you enjoy using our app and connecting with your loved ones!
